@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 
-class Login : public cocos2d::Layer, public cocos2d::ui::EditBoxDelegate
+class MLogin : public cocos2d::Layer, public cocos2d::ui::EditBoxDelegate
 {
 public:
     static cocos2d::Scene* createScene();
@@ -22,7 +22,13 @@ public:
     static void onLogin(Ref* pSender);
     
     // implement the "static create()" method manually
-    CREATE_FUNC(Login);
+    CREATE_FUNC(MLogin);
+    
+    
+    virtual void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
+    virtual void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
+    virtual void editBoxTextChanged(cocos2d::ui::EditBox* editBox, const std::string& text);
+    virtual void editBoxReturn(cocos2d::ui::EditBox* editBox);
     
 private:
     cocos2d::ui::EditBox *m_pEditBoxName;

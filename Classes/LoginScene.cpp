@@ -10,13 +10,16 @@
 
 USING_NS_CC;
 
-Scene* Login::createScene()
+static std::string username = "";
+static std::string channel = "";
+
+Scene* MLogin::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = Login::create();
+    auto layer = MLogin::create();
     
     // add layer as a child to scene
     scene->addChild(layer);
@@ -26,7 +29,7 @@ Scene* Login::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool Login::init()
+bool MLogin::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -71,7 +74,7 @@ bool Login::init()
     
     Label *label = Label::createWithSystemFont("Login", "Arial", 50);
 
-    void (*onloginCB)(Ref *ref) = &Login::onLogin;
+    void (*onloginCB)(Ref *ref) = &MLogin::onLogin;
     
     MenuItemLabel *pMenuItem = MenuItemLabel::create(label, onloginCB);// const ccMenuCallback &callback
     Menu *pMenu = Menu::create(pMenuItem, NULL);
@@ -88,8 +91,34 @@ bool Login::init()
 }
 
 
-void Login::onLogin(Ref *pSender)
+void MLogin::onLogin(Ref *pSender)
 {
     CCLOG(">>>>>>on login\n");
+}
 
+
+void MLogin::editBoxEditingDidBegin(cocos2d::ui::EditBox *editBox)
+{
+    CCLOG("editBox %p DidBegin !", editBox);
+}
+
+void MLogin::editBoxEditingDidEnd(cocos2d::ui::EditBox *editBox)
+{
+    CCLOG("editBox %p DidEnd !", editBox);
+}
+
+void MLogin::editBoxTextChanged(cocos2d::ui::EditBox *editBox, const std::string &text)
+{
+    if (editBox == m_pEditBoxName) {
+        username = text;
+        CCLOG("name editBox %p TextChanged, text: %s ", editBox, text.c_str());
+    } else {
+        channel = text;
+        CCLOG("channel editBox %p TextChanged, text: %s ", editBox, text.c_str());
+    }
+}
+
+void MLogin::editBoxReturn(cocos2d::ui::EditBox *editBox)
+{
+    CCLOG("editBox %p was returned !", editBox);
 }
