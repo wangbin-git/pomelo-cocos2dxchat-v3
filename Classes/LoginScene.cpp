@@ -38,16 +38,15 @@ bool MLogin::init()
         return false;
     }
     
-    auto glview = Director::getInstance()->getOpenGLView();
-    Point visibleOrigin = glview->getVisibleOrigin();
-    Size visibleSize = glview->getVisibleSize();
-    Size editBoxSize = Size(visibleSize.width - 100, 60);
+    Point visibleOrigin = Director::getInstance()->getVisibleOrigin();
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Size editBoxSize = Size(visibleSize.width - 20, 20);
     m_pEditBoxName = cocos2d::ui::EditBox::create(editBoxSize, cocos2d::ui::Scale9Sprite::create("green_edit.png"));
     m_pEditBoxName->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, visibleOrigin.y + visibleSize.height * 3 / 4));
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    m_pEditBoxName->setFont("Paint Boy", 25);
+    m_pEditBoxName->setFont("Paint Boy", 15);
 #else
-    m_pEditBoxName->setFont("Arial", 25);
+    m_pEditBoxName->setFont("Arial", 15);
 #endif
     m_pEditBoxName->setFontColor(Color3B::BLACK);
     m_pEditBoxName->setPlaceHolder("Name:");
@@ -60,9 +59,9 @@ bool MLogin::init()
     m_pEditBoxChannel = cocos2d::ui::EditBox::create(editBoxSize, cocos2d::ui::Scale9Sprite::create("green_edit.png"));
     m_pEditBoxChannel->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, visibleOrigin.y + visibleSize.height / 2));
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    m_pEditBoxChannel->setFont("Paint Boy", 25);
+    m_pEditBoxChannel->setFont("Paint Boy", 15);
 #else
-    m_pEditBoxChannel->setFont("Arial", 25);
+    m_pEditBoxChannel->setFont("Arial", 15);
 #endif
     m_pEditBoxChannel->setFontColor(Color3B::BLACK);
     m_pEditBoxChannel->setPlaceHolder("Channel:");
@@ -72,7 +71,7 @@ bool MLogin::init()
     m_pEditBoxChannel->setDelegate(this);
     this->addChild(m_pEditBoxChannel, 2);
     
-    Label *label = Label::createWithSystemFont("Login", "Arial", 50);
+    Label *label = Label::createWithSystemFont("Login", "Arial", 20);
 
     void (*onloginCB)(Ref *ref) = &MLogin::onLogin;
     
@@ -82,7 +81,7 @@ bool MLogin::init()
     pMenuItem->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, visibleOrigin.y + visibleSize.height / 4));
     this->addChild(pMenu, 1);
     
-    Label *pLabel = Label::createWithSystemFont("pomelo-cocos2dchat", "Arial", 30);
+    Label *pLabel = Label::createWithSystemFont("pomelo-cocos2dchat", "Arial", 10);
     Size size = Director::getInstance()->getWinSize();
     pLabel->setPosition(Vec2(size.width / 2, size.height - 30));
     this->addChild(pLabel, 1);
