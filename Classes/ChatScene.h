@@ -19,6 +19,11 @@ public:
     
     virtual bool init();
     
+    static void onBack(Ref *pSender);
+    static void onUsers(Ref *pSender);
+    static void onSend(Ref *pSender);
+
+    
     // implement the "static create()" method manually
     CREATE_FUNC(Chat);
     
