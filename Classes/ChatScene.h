@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "cocos-ext.h"
 
-class Chat: public cocos2d::Layer
+class Chat: public cocos2d::Layer, public cocos2d::TextFieldDelegate
 {
 public:
     static cocos2d::Scene* createScene();
@@ -26,6 +26,11 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(Chat);
+    
+    virtual bool onTextFieldAttachWithIME(cocos2d::TextFieldTTF * pSender);
+    virtual bool onTextFieldDetachWithIME(cocos2d::TextFieldTTF * pSender);
+    virtual bool onTextFieldInsertText(cocos2d::TextFieldTTF * pSender, const char * text, int nLen);
+    virtual bool onTextFieldDeleteBackward(cocos2d::TextFieldTTF * pSender, const char * delText, int nLen);
     
 private:
     cocos2d::Point m_tBeginPos;

@@ -7,7 +7,7 @@
 //
 
 #include "LoginScene.h"
-
+#include "ChatScene.h"
 USING_NS_CC;
 
 static std::string username = "";
@@ -89,6 +89,41 @@ bool MLogin::init()
     return true;
 }
 
+
+void MLogin::onEnter()
+{
+    Layer::onEnter();
+    CCLOG("Login onEnter");
+    
+    Director::getInstance()->getScheduler()->schedule(schedule_selector(MLogin::dispatchLoginCallbacks), this, 0, false);
+}
+
+void MLogin::dispatchLoginCallbacks(float delta)
+{
+    
+    //CCDirector::sharedDirector()->getScheduler()->pauseTarget(this);
+    Director::getInstance()->getScheduler()->pauseTarget(this);
+    //CCScene* pScene = CCScene::create();
+    Scene *pScene = Scene::create();
+    Chat* pLayer = new Chat();
+//    pLayer->setChannel(channel);
+//    pLayer->setUser(username);
+//    pLayer->setClient(pomelo_client);
+//    pLayer->setUserQueue(userQueue);
+//    pLayer->setMessageQueue(messageQueue);
+    
+    CCLOG("init player");
+    if(pLayer && pLayer->init()) {
+        //pLayer->autorelease();
+        pScene->addChild(pLayer);
+        CCLOG("director replaceScene");
+        Director::getInstance()->replaceScene(TransitionFade::create(1, pScene));
+        //CCDirector::sharedDirector()->replaceScene(CCTransitionFade::create(1, pScene));
+    } else {
+        delete pLayer;
+        pLayer = NULL;
+    }
+}
 
 void MLogin::onLogin(Ref *pSender)
 {

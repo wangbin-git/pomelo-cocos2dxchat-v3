@@ -24,6 +24,8 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(MLogin);
     
+    void dispatchLoginCallbacks(float delta);
+    virtual void onEnter();
     
     virtual void editBoxEditingDidBegin(cocos2d::ui::EditBox* editBox);
     virtual void editBoxEditingDidEnd(cocos2d::ui::EditBox* editBox);
